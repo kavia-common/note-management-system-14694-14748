@@ -1,75 +1,58 @@
-# Nuxt Minimal Starter
+# Notes Frontend (Nuxt 3)
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+A modern, light-themed notes application built with Nuxt 3.
+
+Features:
+- User authentication (login/register)
+- Create, edit, and delete notes
+- View list of notes with search
+- Modern light theme with sidebar, top bar, and editor panel
+- REST API-based backend communication
 
 ## Setup
 
-Make sure to install dependencies:
-
+1. Install dependencies:
 ```bash
-# npm
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
 ```
 
-## Development Server
+2. Configure environment:
+   - Copy `.env.example` to `.env` and set values:
+```
+NUXT_PUBLIC_API_BASE=http://localhost:8000
+NUXT_PUBLIC_SITE_URL=http://localhost:3000
+```
 
-Start the development server on `http://localhost:3000`:
-
+3. Run dev server:
 ```bash
-# npm
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+Open http://localhost:3000
 
-Build the application for production:
+## Environment
 
-```bash
-# npm
-npm run build
+Environment variables (set in `.env`):
+- `NUXT_PUBLIC_API_BASE` Base URL of your backend REST API.
+- `NUXT_PUBLIC_SITE_URL` Full URL of this frontend (optional; used for redirects in some deployments).
 
-# pnpm
-pnpm build
+## Notes
 
-# yarn
-yarn build
+- API endpoints expected:
+  - POST /auth/login { email, password } -> { token, user }
+  - POST /auth/register { email, password, name? } -> { token, user }
+  - GET /notes -> Note[]
+  - POST /notes -> Note
+  - PUT /notes/:id -> Note
+  - DELETE /notes/:id -> 204
 
-# bun
-bun run build
-```
+- Auth token is stored in localStorage (key: `auth_token`) and attached to requests as `Authorization: Bearer <token>`.
 
-Locally preview production build:
+- All configurable via `NUXT_PUBLIC_API_BASE`.
 
-```bash
-# npm
-npm run preview
+## Scripts
+- `npm run dev` start dev server
+- `npm run build` build for production
+- `npm run preview` preview production build
 
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Refer to the [Nuxt docs](https://nuxt.com/docs) for advanced configuration.
